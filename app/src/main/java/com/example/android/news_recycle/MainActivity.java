@@ -33,37 +33,41 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ArrayList<News> newsArray = new ArrayList<>();
-    RecyclerView recyclerView;
+    ArrayList<News_h> newsArray_h = new ArrayList<>();
+    RecyclerView recyclerView,recyclerView1;
     NewsListAdapter newsListAdapter;
-    String url = "https://gnews.io/api/v4/top-headlines?token=a5aaa59810d58657fc9d4f7d6c890ca6&lang=en&country=in&topic=nation";
+    //OfferAdapter offerAdapter;
+    NewsListAdapter_h newsListAdapter_h;
+    String url = "https://gnews.io/api/v4/top-headlines?token=f1d8a882ca73d2f674a31e1339b923eb&lang=en&country=in&topic=nation";
+    String url_h = "https://gnews.io/api/v4/top-headlines?token=f1d8a882ca73d2f674a31e1339b923eb&lang=en&country=in&topic=breaking-news";
     public void changeurls(View view){
         //Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-         url = "https://gnews.io/api/v4/top-headlines?token=a5aaa59810d58657fc9d4f7d6c890ca6&lang=en&country=in&topic=sports";
+         String  url_sports = "https://gnews.io/api/v4/top-headlines?token=f1d8a882ca73d2f674a31e1339b923eb&lang=en&country=in&topic=sports";
          newsArray.clear();
-        fetchApi();
+        fetchApi(url_sports);
         newsListAdapter.notifyDataSetChanged();
 
 
     }
     public void changeurle(View view){
         //Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-        url = "https://gnews.io/api/v4/top-headlines?token=a5aaa59810d58657fc9d4f7d6c890ca6&lang=en&country=in&topic=entertainment";
+         String url_ent = "https://gnews.io/api/v4/top-headlines?token=f1d8a882ca73d2f674a31e1339b923eb&lang=en&country=in&topic=entertainment";
         newsArray.clear();
-        fetchApi();
+        fetchApi(url_ent);
         newsListAdapter.notifyDataSetChanged();
     }
     public void changeurlw(View view){
         //Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-        url = "https://gnews.io/api/v4/top-headlines?token=a5aaa59810d58657fc9d4f7d6c890ca6&lang=en&country=in&topic=world";
+        String url_world = "https://gnews.io/api/v4/top-headlines?token=f1d8a882ca73d2f674a31e1339b923eb&lang=en&country=in&topic=world";
         newsArray.clear();
-        fetchApi();
+        fetchApi(url_world);
         newsListAdapter.notifyDataSetChanged();
     }
     public void changeurlsc(View view){
         //Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-        url = "https://gnews.io/api/v4/top-headlines?token=a5aaa59810d58657fc9d4f7d6c890ca6&lang=en&country=in&topic=science";
+        String url_science = "https://gnews.io/api/v4/top-headlines?token=f1d8a882ca73d2f674a31e1339b923eb&lang=en&country=in&topic=science";
         newsArray.clear();
-        fetchApi();
+        fetchApi(url_science);
         newsListAdapter.notifyDataSetChanged();
     }
      //List<News> newsArray;
@@ -75,9 +79,41 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //for horizontal
+
+        recyclerView1 = (RecyclerView) findViewById(R.id.firstrecyclerView);
+        LinearLayoutManager linearLayoutManager1 = new LinearLayoutManager(getApplicationContext());
+        linearLayoutManager1.setOrientation(LinearLayoutManager.HORIZONTAL);
+        recyclerView1.setLayoutManager(linearLayoutManager1);
+        recyclerView1.setHasFixedSize(true);
+        /*List<Integer> iamgelist = new ArrayList<>();
+        iamgelist.add(R.drawable.night);
+        iamgelist.add(R.drawable.night);
+        iamgelist.add(R.drawable.night);
+        iamgelist.add(R.drawable.night);
+        iamgelist.add(R.drawable.night);
+        iamgelist.add(R.drawable.night);
+        iamgelist.add(R.drawable.night);
+        offerAdapter = new OfferAdapter(iamgelist);
+        recyclerView1.setAdapter(offerAdapter);*/
+
+        newsListAdapter_h = new NewsListAdapter_h(MainActivity.this,newsArray_h);
+        recyclerView1.setAdapter(newsListAdapter_h);
+
+        fetchApi_h(url_h);
+        //newsListAdapter_h.notifyDataSetChanged();
+
+        //swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeup);
 
 
-         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        //newsListAdapter.notifyDataSetChanged();
+
+
+
+
+
+        // for vertical
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
 
 
@@ -87,13 +123,15 @@ public class MainActivity extends AppCompatActivity {
         //fetchApi();
         newsListAdapter = new NewsListAdapter(MainActivity.this,newsArray);
         recyclerView.setAdapter(newsListAdapter);
-        fetchApi();
-
+        fetchApi(url);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeup);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                fetchApi();
+                newsArray.clear();
+                newsArray_h.clear();
+                fetchApi(url);
+                fetchApi_h(url_h);
                 Toast.makeText(MainActivity.this, "Data Refreshed", Toast.LENGTH_SHORT).show();
                 swipeRefreshLayout.setRefreshing(false);
             }
@@ -103,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void fetchApi(){
+    public void fetchApi(String url){
         ProgressBar prog = (ProgressBar) findViewById(R.id.prog);
         prog.setVisibility(View.VISIBLE);
         //prog.setVisibility(View.VISIBLE);
@@ -134,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
                         News news = new News(title,description,url,image);
                         //Toast.makeText(MainActivity.this, title, Toast.LENGTH_SHORT).show();
                         newsArray.add(news);
+                        //newsArray_h.add(news);
                         prog.setVisibility(View.GONE);
 
                     }
@@ -153,6 +192,61 @@ public class MainActivity extends AppCompatActivity {
         MySingleton.getInstance(MainActivity.this).addToRequestQueue(jsonObjectRequest);
 
     }
+
+    public void fetchApi_h(String url){
+        //ProgressBar prog = (ProgressBar) findViewById(R.id.prog);
+        //prog.setVisibility(View.VISIBLE);
+        //prog.setVisibility(View.VISIBLE);
+        //RequestQueue queue = Volley.newRequestQueue(this);
+        //String url = "https://gnews.io/api/v4/top-headlines?token=a5aaa59810d58657fc9d4f7d6c890ca6&lang=en&country=in&topic=nation";
+        //String url = "https://newsapi.org/v2/top-headlines?country=in&category=health&apiKey=097575c06ecd4bc4b550fae79a2bd131";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    //JSONObject base = new JSONObject(response);
+                    JSONArray jsonArray = response.getJSONArray("articles");
+                    //ArrayList<News> newsArray = new ArrayList<>();
+                    for(int i=0 ; i<jsonArray.length() ; i++){
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+                        String title = jsonObject.getString("title");
+                        String description = jsonObject.getString("description");
+                        String url= jsonObject.getString("url");
+                        String image = jsonObject.getString("image");
+                        //JSONArray newjsonarray = jsonObject.getJSONArray("source");
+                        //String name = (String) jsonObject.getJSONObject("souce").get("name");
+                        //Toast.makeText(MainActivity.this, name, Toast.LENGTH_SHORT).show();
+                        //for(int j=0; j<newjsonarray.length(); j++){
+                        //JSONObject newjsonObject = jsonArray.getJSONObject(i);
+                        //String name = newjsonObject.getString("name");
+                        //Toast.makeText(MainActivity.this, name, Toast.LENGTH_SHORT).show();
+                        //}
+                        News_h news = new News_h(title,description,url,image);
+                        //Toast.makeText(MainActivity.this, title, Toast.LENGTH_SHORT).show();
+                        //newsArray.add(news);
+                        newsArray_h.add(news);
+                        //prog.setVisibility(View.GONE);
+
+                    }
+                    //
+                    newsListAdapter_h.notifyDataSetChanged();
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, "Nope", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //queue.add(jsonObjectRequest);
+        MySingleton.getInstance(MainActivity.this).addToRequestQueue(jsonObjectRequest);
+
+    }
+
+
 
 
 }
