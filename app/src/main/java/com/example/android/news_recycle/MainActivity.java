@@ -7,10 +7,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -32,17 +36,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    //ImageView nointernet = (ImageView) findViewById(R.id.noInternet);
+    private Boolean wifiConnected;
+    private Boolean mobileConnected;
     ArrayList<News> newsArray = new ArrayList<>();
     ArrayList<News_h> newsArray_h = new ArrayList<>();
     RecyclerView recyclerView,recyclerView1;
     NewsListAdapter newsListAdapter;
     //OfferAdapter offerAdapter;
     NewsListAdapter_h newsListAdapter_h;
-    String url = "https://gnews.io/api/v4/top-headlines?token=f1d8a882ca73d2f674a31e1339b923eb&lang=en&country=in&topic=nation";
-    String url_h = "https://gnews.io/api/v4/top-headlines?token=f1d8a882ca73d2f674a31e1339b923eb&lang=en&country=in&topic=breaking-news";
+    String url = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=nation";
+    String url_h = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=breaking-news";
     public void changeurls(View view){
         //Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-         String  url_sports = "https://gnews.io/api/v4/top-headlines?token=f1d8a882ca73d2f674a31e1339b923eb&lang=en&country=in&topic=sports";
+         String  url_sports = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=sports";
          newsArray.clear();
         fetchApi(url_sports);
         newsListAdapter.notifyDataSetChanged();
@@ -51,21 +58,21 @@ public class MainActivity extends AppCompatActivity {
     }
     public void changeurle(View view){
         //Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-         String url_ent = "https://gnews.io/api/v4/top-headlines?token=f1d8a882ca73d2f674a31e1339b923eb&lang=en&country=in&topic=entertainment";
+         String url_ent = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=entertainment";
         newsArray.clear();
         fetchApi(url_ent);
         newsListAdapter.notifyDataSetChanged();
     }
     public void changeurlw(View view){
         //Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-        String url_world = "https://gnews.io/api/v4/top-headlines?token=f1d8a882ca73d2f674a31e1339b923eb&lang=en&country=in&topic=world";
+        String url_world = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=world";
         newsArray.clear();
         fetchApi(url_world);
         newsListAdapter.notifyDataSetChanged();
     }
     public void changeurlsc(View view){
         //Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-        String url_science = "https://gnews.io/api/v4/top-headlines?token=f1d8a882ca73d2f674a31e1339b923eb&lang=en&country=in&topic=science";
+        String url_science = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=science";
         newsArray.clear();
         fetchApi(url_science);
         newsListAdapter.notifyDataSetChanged();
@@ -100,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
         newsListAdapter_h = new NewsListAdapter_h(MainActivity.this,newsArray_h);
         recyclerView1.setAdapter(newsListAdapter_h);
 
+
         fetchApi_h(url_h);
         //newsListAdapter_h.notifyDataSetChanged();
 
@@ -120,10 +128,10 @@ public class MainActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
-        //fetchApi();
+        fetchApi(url);
         newsListAdapter = new NewsListAdapter(MainActivity.this,newsArray);
         recyclerView.setAdapter(newsListAdapter);
-        fetchApi(url);
+        //fetchApi(url);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeup);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -132,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 newsArray_h.clear();
                 fetchApi(url);
                 fetchApi_h(url_h);
-                Toast.makeText(MainActivity.this, "Data Refreshed", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "Data Refreshed", Toast.LENGTH_SHORT).show();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -142,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void fetchApi(String url){
+        checkConnection();
         ProgressBar prog = (ProgressBar) findViewById(R.id.prog);
         prog.setVisibility(View.VISIBLE);
         //prog.setVisibility(View.VISIBLE);
@@ -185,7 +194,8 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, "Nope", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Failed! To Load Data , Try Later ", Toast.LENGTH_SHORT).show();
+                prog.setVisibility(View.GONE);
             }
         });
         //queue.add(jsonObjectRequest);
@@ -194,6 +204,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fetchApi_h(String url){
+        checkConnection();
+        ProgressBar prog2 = (ProgressBar) findViewById(R.id.prog2);
+        prog2.setVisibility(View.VISIBLE);
         //ProgressBar prog = (ProgressBar) findViewById(R.id.prog);
         //prog.setVisibility(View.VISIBLE);
         //prog.setVisibility(View.VISIBLE);
@@ -225,7 +238,7 @@ public class MainActivity extends AppCompatActivity {
                         //Toast.makeText(MainActivity.this, title, Toast.LENGTH_SHORT).show();
                         //newsArray.add(news);
                         newsArray_h.add(news);
-                        //prog.setVisibility(View.GONE);
+                        prog2.setVisibility(View.GONE);
 
                     }
                     //
@@ -238,11 +251,39 @@ public class MainActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, "Nope", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Failed! To Load Data , Try Later  ", Toast.LENGTH_SHORT).show();
+                prog2.setVisibility(View.GONE);
+
+
             }
         });
         //queue.add(jsonObjectRequest);
         MySingleton.getInstance(MainActivity.this).addToRequestQueue(jsonObjectRequest);
+
+    }
+
+    public void checkConnection(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+
+        if(networkInfo != null && networkInfo.isConnected()){
+            wifiConnected = networkInfo.getType()==ConnectivityManager.TYPE_WIFI;
+            mobileConnected = networkInfo.getType()==ConnectivityManager.TYPE_MOBILE;
+
+            if(wifiConnected || mobileConnected){
+                //Toast.makeText(this, "on", Toast.LENGTH_SHORT).show();
+                ImageView imageView = (ImageView) findViewById(R.id.noInternet);
+                imageView.setVisibility(View.GONE);
+            }
+            else{
+                Toast.makeText(this, "NO INTERNET CONNECTION", Toast.LENGTH_SHORT).show();
+                newsArray.clear();
+                newsArray_h.clear();
+                //nointernet.setVisibility(View.GONE);
+                ImageView imageView = (ImageView) findViewById(R.id.noInternet);
+                imageView.setVisibility(View.VISIBLE);
+            }
+        }
 
     }
 

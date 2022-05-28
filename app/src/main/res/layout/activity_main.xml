@@ -7,12 +7,27 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/noInternet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/no_internet1"
+                    android:layout_marginTop="400dp"
+                   />
                 <ProgressBar
                     android:id="@+id/prog"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="500dp"
                     android:layout_marginLeft="180dp"/>
+
+                <ProgressBar
+                    android:id="@+id/prog2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginLeft="180dp"/>
+
 
 
 
@@ -22,7 +37,7 @@
                     android:text="Breaking-News"
                     android:layout_marginLeft="10dp"
                     android:fontFamily="sans-serif"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:textColor="@color/black"
                     android:layout_marginTop="10dp"
                     >
@@ -33,18 +48,20 @@
                     android:id="@+id/firstrecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="50dp"
-                    android:orientation="horizontal" />
+                    android:layout_marginTop="25dp"
+                    android:orientation="horizontal"
+                    android:scrollbars="horizontal"/>
 
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="400dp"
+                            android:layout_marginTop="410dp"
                             android:orientation="horizontal">
 
 
@@ -82,14 +99,11 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerView"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="455dp" />
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="455dp"
+                            android:scrollbars="vertical" />
 
                 </RelativeLayout>
-
-
-
-
 
 
         </RelativeLayout>
