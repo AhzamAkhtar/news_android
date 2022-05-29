@@ -13,7 +13,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/no_internet1"
                     android:layout_marginTop="400dp"
-                   />
+                    />
                 <ProgressBar
                     android:id="@+id/prog"
                     android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
                     android:fontFamily="sans-serif"
                     android:textSize="20dp"
                     android:textColor="@color/black"
-                    android:layout_marginTop="370dp"
+                    android:layout_marginTop="380dp"
                     >
 
                 </TextView>
@@ -75,7 +75,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="410dp"
+                            android:layout_marginTop="420dp"
                             android:orientation="horizontal">
 
 
@@ -114,7 +114,7 @@
                             android:id="@+id/recyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="455dp"
+                            android:layout_marginTop="465dp"
                             android:scrollbars="vertical" />
 
                 </RelativeLayout>

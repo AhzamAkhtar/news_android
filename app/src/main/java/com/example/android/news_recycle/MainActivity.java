@@ -34,6 +34,8 @@ import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -47,11 +49,11 @@ public class MainActivity extends AppCompatActivity {
     //OfferAdapter offerAdapter;
     NewsListAdapter_h newsListAdapter_h;
     int pos;
-    String url = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=nation";
-    String url_h = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=breaking-news";
+    String url = "https://gnews.io/api/v4/top-headlines?token=a5aaa59810d58657fc9d4f7d6c890ca6&lang=en&country=in&topic=nation";
+    String url_h = "https://gnews.io/api/v4/top-headlines?token=a5aaa59810d58657fc9d4f7d6c890ca6&lang=en&country=in&topic=breaking-news";
     public void changeurls(View view){
         //Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-         String  url_sports = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=sports";
+         String  url_sports = "https://gnews.io/api/v4/top-headlines?token=a5aaa59810d58657fc9d4f7d6c890ca6&lang=en&country=in&topic=sports";
          newsArray.clear();
         TextView science = (TextView) findViewById(R.id.type);
         science.setText("Articles On Sports");
@@ -62,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void changeurle(View view){
         //Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-         String url_ent = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=entertainment";
+         String url_ent = "https://gnews.io/api/v4/top-headlines?token=a5aaa59810d58657fc9d4f7d6c890ca6&lang=en&country=in&topic=entertainment";
         newsArray.clear();
         TextView science = (TextView) findViewById(R.id.type);
         science.setText("Articles On Entertainment");
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void changeurlw(View view){
         //Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-        String url_world = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=world";
+        String url_world = "https://gnews.io/api/v4/top-headlines?token=a5aaa59810d58657fc9d4f7d6c890ca6&lang=en&country=in&topic=world";
         newsArray.clear();
         TextView science = (TextView) findViewById(R.id.type);
         science.setText("Articles On World");
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void changeurlsc(View view){
         //Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
-        String url_science = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=science";
+        String url_science = "https://gnews.io/api/v4/top-headlines?token=a5aaa59810d58657fc9d4f7d6c890ca6&lang=en&country=in&topic=science";
         newsArray.clear();
         TextView science = (TextView) findViewById(R.id.type);
         science.setText("Articles On Science");
@@ -195,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
                         //Toast.makeText(MainActivity.this, title, Toast.LENGTH_SHORT).show();
                         newsArray.add(news);
                         //newsArray_h.add(news);
+                        Collections.shuffle(newsArray);
                         prog.setVisibility(View.GONE);
 
                     }
@@ -251,6 +254,7 @@ public class MainActivity extends AppCompatActivity {
                         //Toast.makeText(MainActivity.this, title, Toast.LENGTH_SHORT).show();
                         //newsArray.add(news);
                         newsArray_h.add(news);
+                        Collections.shuffle(newsArray_h);
                         prog2.setVisibility(View.GONE);
 
                     }

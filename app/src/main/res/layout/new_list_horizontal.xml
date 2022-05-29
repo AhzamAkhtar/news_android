@@ -17,6 +17,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:elevation="20dp"/>
 
+
     <TextView
         android:id="@+id/title_id_h"
         android:layout_width="0dp"
@@ -43,34 +44,33 @@
         android:id="@+id/share"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/share"
-        android:onClick="share"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/description_id_h"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/description_id_h"
-        app:layout_constraintTop_toBottomOf="@+id/description_id_h"
-        app:layout_constraintVertical_bias="0.058"
         android:layout_marginLeft="300dp"
         android:layout_marginTop="5dp"
-        />
+        android:onClick="share"
+        android:scaleType="fitXY"
+        android:src="@drawable/share"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/description_id_h"
+        app:layout_constraintHorizontal_bias="0.883"
+        app:layout_constraintStart_toStartOf="@+id/description_id_h"
+        app:layout_constraintTop_toBottomOf="@+id/description_id_h"
+        app:layout_constraintVertical_bias="0.515" />
+
     <ImageView
         android:id="@+id/delete"
         android:layout_width="30dp"
         android:layout_height="25dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:onClick="share"
         android:scaleType="fitXY"
         android:src="@drawable/delete"
-        android:onClick="delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/description_id_h"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.883"
         app:layout_constraintStart_toStartOf="@+id/description_id_h"
         app:layout_constraintTop_toBottomOf="@+id/description_id_h"
-        app:layout_constraintVertical_bias="0.058"
-        android:layout_marginLeft="230dp"
-        android:layout_marginTop="5dp"
-        />
+        app:layout_constraintVertical_bias="0.515" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
