@@ -52,6 +52,20 @@
                     android:orientation="horizontal"
                     android:scrollbars="horizontal"/>
 
+                <TextView
+                    android:id="@+id/type"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Articles On Nation"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="sans-serif"
+                    android:textSize="20dp"
+                    android:textColor="@color/black"
+                    android:layout_marginTop="370dp"
+                    >
+
+                </TextView>
+
 
                 <RelativeLayout
                     android:layout_width="match_parent"

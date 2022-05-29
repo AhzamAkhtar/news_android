@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         //Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
          String  url_sports = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=sports";
          newsArray.clear();
+        TextView science = (TextView) findViewById(R.id.type);
+        science.setText("Articles On Sports");
         fetchApi(url_sports);
         newsListAdapter.notifyDataSetChanged();
 
@@ -62,6 +64,8 @@ public class MainActivity extends AppCompatActivity {
         //Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
          String url_ent = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=entertainment";
         newsArray.clear();
+        TextView science = (TextView) findViewById(R.id.type);
+        science.setText("Articles On Entertainment");
         fetchApi(url_ent);
         newsListAdapter.notifyDataSetChanged();
     }
@@ -69,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         //Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
         String url_world = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=world";
         newsArray.clear();
+        TextView science = (TextView) findViewById(R.id.type);
+        science.setText("Articles On World");
         fetchApi(url_world);
         newsListAdapter.notifyDataSetChanged();
     }
@@ -76,13 +82,12 @@ public class MainActivity extends AppCompatActivity {
         //Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show();
         String url_science = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=science";
         newsArray.clear();
+        TextView science = (TextView) findViewById(R.id.type);
+        science.setText("Articles On Science");
         fetchApi(url_science);
         newsListAdapter.notifyDataSetChanged();
     }
-    public void share(View view){
-        //int position = this.getAbsoluteAdapterPosition();
 
-    }
      //List<News> newsArray;
 
      SwipeRefreshLayout swipeRefreshLayout;
@@ -144,6 +149,8 @@ public class MainActivity extends AppCompatActivity {
             public void onRefresh() {
                 newsArray.clear();
                 newsArray_h.clear();
+                TextView science = (TextView) findViewById(R.id.type);
+                science.setText("Articles On Nation");
                 fetchApi(url);
                 fetchApi_h(url_h);
                 //Toast.makeText(MainActivity.this, "Data Refreshed", Toast.LENGTH_SHORT).show();
