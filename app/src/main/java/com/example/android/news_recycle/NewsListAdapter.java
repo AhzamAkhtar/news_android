@@ -1,6 +1,7 @@
 package com.example.android.news_recycle;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,22 @@ public class NewsListAdapter  extends RecyclerView.Adapter<NewsListAdapter.MyVie
         holder.title.setText(newss.getTitle());
         holder.description.setText(newss.getDescription());
         Picasso.get().load(newss.getUrlTOImage()).into(holder.image);
+        holder.share_verticle.setOnClickListener((view -> {
+            //Toast.makeText(context,newss.getTitle_h(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent();
+            intent.setAction(Intent.ACTION_SEND);
+            intent.putExtra(Intent.EXTRA_TEXT,"Read This Article \n" + newss.getTitle() + "\n" + newss.getUrl());
+            intent.setType("text/plain");
+
+            Intent shareintent = Intent.createChooser(intent,null);
+            context.startActivity(shareintent);
+
+        }));
+        holder.delete_verticle.setOnClickListener((view -> {
+            newslist.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position,newslist.size());
+        }));
 
     }
 
@@ -55,12 +72,16 @@ public class NewsListAdapter  extends RecyclerView.Adapter<NewsListAdapter.MyVie
         TextView title;
         TextView description;
         ImageView image;
+        ImageView share_verticle;
+        ImageView delete_verticle;
         public MyViewHolder(View itemView){
             super(itemView);
             itemView.setOnClickListener(this);
             title = (TextView) itemView.findViewById(R.id.title_id);
             description = (TextView) itemView.findViewById(R.id.description_id);
             image = (ImageView) itemView.findViewById(R.id.testing);
+            share_verticle = (ImageView) itemView.findViewById(R.id.share_verticle);
+            delete_verticle = (ImageView) itemView.findViewById(R.id.delete_verticle);
         }
         public void onClick(View view){
             int position = this.getAbsoluteAdapterPosition();

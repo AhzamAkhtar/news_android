@@ -8,7 +8,7 @@
     <ImageView
         android:id="@+id/testing"
         android:layout_width="0dp"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -35,6 +35,37 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_id"
         android:layout_marginTop="6dp"/>
+    <ImageView
+        android:id="@+id/share_verticle"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/share"
+        android:onClick="share"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/description_id"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/description_id"
+        app:layout_constraintTop_toBottomOf="@+id/description_id"
+        app:layout_constraintVertical_bias="0.058"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="5dp"/>
+    <ImageView
+        android:id="@+id/delete_verticle"
+        android:layout_width="30dp"
+        android:layout_height="25dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/delete"
+        android:onClick="delete_vertice"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/description_id"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/description_id"
+        app:layout_constraintTop_toBottomOf="@+id/description_id"
+        app:layout_constraintVertical_bias="0.058"
+        android:layout_marginLeft="230dp"
+        android:layout_marginTop="5dp"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

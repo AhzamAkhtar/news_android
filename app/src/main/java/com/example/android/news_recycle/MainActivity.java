@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     NewsListAdapter newsListAdapter;
     //OfferAdapter offerAdapter;
     NewsListAdapter_h newsListAdapter_h;
+    int pos;
     String url = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=nation";
     String url_h = "https://gnews.io/api/v4/top-headlines?token=b2cc9ca74c1f3ad3403c04fd9a92b8c3&lang=en&country=in&topic=breaking-news";
     public void changeurls(View view){
@@ -76,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
         newsArray.clear();
         fetchApi(url_science);
         newsListAdapter.notifyDataSetChanged();
+    }
+    public void share(View view){
+        //int position = this.getAbsoluteAdapterPosition();
+
     }
      //List<News> newsArray;
 
