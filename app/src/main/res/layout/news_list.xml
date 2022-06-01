@@ -66,6 +66,22 @@
         android:layout_marginLeft="230dp"
         android:layout_marginTop="5dp"
         />
+    <ImageView
+        android:id="@+id/fav_verticle"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/fav"
+        android:onClick="fav_vertice"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/description_id"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="@+id/description_id"
+        app:layout_constraintTop_toBottomOf="@+id/description_id"
+        app:layout_constraintVertical_bias="0.058"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="5dp"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

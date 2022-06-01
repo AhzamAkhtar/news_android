@@ -10,15 +10,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.example.android.news_recycle.data.MyDbHandler;
+import com.example.android.news_recycle.modal.Favourite;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class NewsListAdapter  extends RecyclerView.Adapter<NewsListAdapter.MyViewHolder> {
     //ArrayList<News> newslist   = new ArrayList<>();
@@ -61,6 +60,17 @@ public class NewsListAdapter  extends RecyclerView.Adapter<NewsListAdapter.MyVie
             notifyItemRemoved(position);
             notifyItemRangeChanged(position,newslist.size());
         }));
+        /**holder.fav_verticle.setOnClickListener(view -> {
+            MyDbHandler mylist = new MyDbHandler(context);
+
+            Favourite myfav = new Favourite();
+            myfav.setTitle(newss.getTitle());
+            myfav.setDescription(newss.getDescription());
+            myfav.setImage(newss.getUrlTOImage());
+            mylist.addFavourite(myfav);
+
+            //Toast.makeText(context, title, Toast.LENGTH_SHORT).show();
+        });**/
 
     }
 
@@ -74,6 +84,7 @@ public class NewsListAdapter  extends RecyclerView.Adapter<NewsListAdapter.MyVie
         ImageView image;
         ImageView share_verticle;
         ImageView delete_verticle;
+        ImageView fav_verticle;
         public MyViewHolder(View itemView){
             super(itemView);
             itemView.setOnClickListener(this);
@@ -82,6 +93,7 @@ public class NewsListAdapter  extends RecyclerView.Adapter<NewsListAdapter.MyVie
             image = (ImageView) itemView.findViewById(R.id.testing);
             share_verticle = (ImageView) itemView.findViewById(R.id.share_verticle);
             delete_verticle = (ImageView) itemView.findViewById(R.id.delete_verticle);
+            fav_verticle = (ImageView) itemView.findViewById(R.id.fav_verticle);
         }
         public void onClick(View view){
             int position = this.getAbsoluteAdapterPosition();

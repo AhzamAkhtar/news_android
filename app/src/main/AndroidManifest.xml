@@ -13,6 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.News_recycle">
         <activity
+            android:name=".FavouriteDisplay"
+            android:label="Numbers"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -27,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.android.news_recycle.modal.Favourite;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -88,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
         science.setText("Articles On Science");
         fetchApi(url_science);
         newsListAdapter.notifyDataSetChanged();
+    }
+    public void fav(View view){
+        Intent i = new Intent(this, FavouriteDisplay.class);
+        startActivity(i);
     }
 
      //List<News> newsArray;
